@@ -10,10 +10,6 @@
       "content": "apt-get install zip"
     },
     {
-      "name": "Initializing Infrastructure",
-      "action": "infrastructure.init"
-    },
-    {
       "name": "Cloning Repository",
       "action": "cmd.run",
       "content": "git init\ngit remote add origin https://github.com/atomizedhq/deploy-template-ec2-runcommand.git\ngit fetch origin HEAD\ngit reset --hard FETCH_HEAD"
@@ -27,6 +23,10 @@
       "name": "Compressing Function Code",
       "action": "cmd.run",
       "content": "zip lambda.zip lambda"
+    },
+    {
+      "name": "Initializing Infrastructure",
+      "action": "infrastructure.init"
     },
     {
       "name": "Planning Infrastructure",
