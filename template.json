@@ -1,13 +1,13 @@
 {
   "requirements": {
     "cloud_provider": "aws",
-    "image": "atomized-node14"
+    "image": "atomized-golang-alpine"
   },
   "build": [
     {
       "name": "Installing Dependencies",
       "action": "cmd.run",
-      "content": "apt-get install zip"
+      "content": "apk add zip git"
     },
     {
       "name": "Cloning Repository",
