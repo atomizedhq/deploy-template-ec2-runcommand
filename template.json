@@ -81,7 +81,7 @@
             ]
           },
           "filename": "/build/lambda.zip",
-          "source_code_hash": "${filebase64sha256(/build/lambda.zip)}",
+          "source_code_hash": "${filebase64sha256(\"/build/lambda.zip\")}",
           "environment": {
             "variables": {
               "INSTANCE_ID": "${var.instance_id}",
@@ -197,6 +197,7 @@
                   ]
                 }
               ],
+              "required": true,
               "type": "select"
             },
             {
@@ -214,6 +215,7 @@
                 "values": "<<cloud.resources.subnets>>"
               },
               "type": "multiselect",
+              "required": true,
               "visible": [
                 {
                   "conditions": ["<<project.metadata.network>> not empty"]
