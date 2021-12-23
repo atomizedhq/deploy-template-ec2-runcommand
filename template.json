@@ -86,10 +86,7 @@
           "memory_size": "${var.memory_size}",
           "vpc_config": {
             "subnet_ids": "${local.vpc_subnets}",
-            "security_group_ids": [
-              "${aws_security_group.security_group.id}",
-              "${local.security_group}"
-            ]
+            "security_group_ids": ["${aws_security_group.security_group.id}"]
           },
           "filename": "/build/function.zip",
           "source_code_hash": "${filebase64sha256(\"/build/function.zip\")}",
@@ -148,6 +145,16 @@
           "tags": {
             "atomized": "true"
           }
+        }
+      },
+      "aws_security_group_rule": {
+        "atomized_remote_access": {
+          "type": "ingress",
+          "from_port": 22,
+          "to_port": 22,
+          "protocol": "tcp",
+          "security_group_id": "${local.security_group}",
+          "source_security_group_id": "${aws_security_group.security_group.id}"
         }
       },
       "aws_cloudwatch_log_group": {
