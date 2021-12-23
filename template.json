@@ -17,7 +17,7 @@
     {
       "name": "Building Function Code",
       "action": "cmd.run",
-      "content": "GOOS=linux go build -mod vendor -v main.go"
+      "content": "GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -mod vendor -v main.go"
     },
     {
       "name": "Compressing Function Code",
