@@ -35,6 +35,17 @@
     {
       "name": "Applying Infrastructure",
       "action": "infrastructure.apply"
+    },
+    {
+      "name": "Invoke Lambda Function",
+      "action": "cmd.run",
+      "content": "aws lambda invoke --function-name <<project.metadata.function_name>> response.json && cat response.json",
+      "conditions": ["<<project.metadata.invoke_function>> == true"]
+    },
+    {
+      "name": "Destroy Resources",
+      "action": "infrastructure.destroy",
+      "conditions": ["<<project.metadata.destroy_on_success>> == true"]
     }
   ],
   "terraform": {
@@ -385,6 +396,43 @@
                       "value": "0"
                     }
                   ]
+                }
+              ]
+            },
+            {
+              "alerts": [
+                {
+                  "message": "Automatically invoke function after applying infrastructure"
+                }
+              ],
+              "name": "invoke_function",
+              "type": "checkbox",
+              "default": "false",
+              "label": "Auto Invoke Function",
+              "onChange": [
+                {
+                  "values": [
+                    {
+                      "key": "destroy_on_success",
+                      "value": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "alerts": [
+                {
+                  "message": "Destroy Lambda and ECR resources after invocation (for one time executions)"
+                }
+              ],
+              "name": "destroy_on_success",
+              "type": "checkbox",
+              "default": "false",
+              "label": "Destroy Resources After Invocation",
+              "visible": [
+                {
+                  "conditions": ["<<project.metadata.invoke_function>> == true"]
                 }
               ]
             }
