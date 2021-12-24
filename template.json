@@ -39,7 +39,7 @@
     {
       "name": "Invoke Lambda Function",
       "action": "cmd.run",
-      "content": "aws lambda invoke --function-name <<project.metadata.function_name>> response.json && cat response.json",
+      "content": "aws lambda invoke --function-name <<project.metadata.function_name>> response.json && cat response.json | sed -e 's/^\"//' -e 's/\"$//'",
       "conditions": ["<<project.metadata.invoke_function>> == true"]
     },
     {
