@@ -93,7 +93,7 @@
             "security_group_ids": ["${aws_security_group.security_group.id}"]
           },
           "filename": "/build/function.zip",
-          "source_code_hash": "${filebase64sha256(\"/build/function.zip\")}",
+          "source_code_hash": "${fileexists(\"/build/function.zip\") ? filebase64sha256(\"/build/function.zip\") : null}",
           "environment": {
             "variables": {
               "INSTANCE_ID": "${var.instance_id}",
