@@ -226,12 +226,6 @@
               "type": "select"
             },
             {
-              "disabled": [
-                {
-                  "conditions": ["valueFrom == true"],
-                  "valueFrom": "assign_public_ip"
-                }
-              ],
               "label": "VPC Subnets",
               "name": "vpc_subnets",
               "optionsFrom": {
@@ -239,6 +233,12 @@
                   {
                     "conditions": ["valueFrom == <<project.metadata.network>>"],
                     "valueFrom": "vpc_id"
+                  }
+                ],
+                "disabled": [
+                  {
+                    "conditions": ["valueFrom == true"],
+                    "valueFrom": "assign_public_ip"
                   }
                 ],
                 "titleKey": "name",
