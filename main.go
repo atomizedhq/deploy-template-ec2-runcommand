@@ -96,6 +96,7 @@ func handler(ctx context.Context) (string, error) {
 	var stdoutBuf bytes.Buffer
 	session.Stdout = &stdoutBuf
 	err = session.Run(config.InstanceCommand)
+	fmt.Println(stdoutBuf.String())
 	return stdoutBuf.String(), err
 }
 
